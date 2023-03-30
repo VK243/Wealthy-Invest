@@ -3,7 +3,8 @@ import pandas as pd
 import numpy as np
 from nsetools import Nse
 from PIL import Image
-from streamlit_option_menu import option_menu
+import requests
+
 
 # Loading Image using PIL
 title_icon = Image.open('images/stock_icon.png')
@@ -12,16 +13,6 @@ st.set_page_config(
     layout="wide",
     page_title="Stocks",
     page_icon=title_icon,)
-
-selected = option_menu(
-        menu_title=None,
-        options = ["Wealthy Invest", "Stocks", "Mutual Funds", "Crypto"],
-        icons = ["house","cash","wallet2","currency-bitcoin"], 
-        menu_icon="cast",
-        default_index=0,
-        orientation= "horizontal"
-    )
-
 
 # Remove the streamlit icon and menubar
 hide_default_format = """<style>#MainMenu {visibility: hidden; }footer {visibility: hidden;}</style>"""
