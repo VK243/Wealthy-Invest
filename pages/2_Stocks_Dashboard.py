@@ -25,6 +25,10 @@ st.set_page_config(
     page_title="Dashboard",
     page_icon=title_icon,)
 
+# Remove the streamlit icon and menubar
+hide_default_format = """<style>#MainMenu {visibility: hidden; }footer {visibility: hidden;}</style>"""
+st.markdown(hide_default_format, unsafe_allow_html=True)
+
 @st.cache_resource
 def load_sym():
     symbol_list_in = ss.get_symbol_list(market="IN")
