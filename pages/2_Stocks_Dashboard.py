@@ -10,6 +10,14 @@ import requests
 import os
 from dotenv import load_dotenv
 
+# Loading Image using PIL
+title_icon = Image.open('images/stock_icon.png')
+
+st.set_page_config(
+    layout="wide",
+    page_title="Dashboard",
+    page_icon=title_icon,)
+
 load_dotenv()
 api_key = os.environ.get('SYM_KEY')
 ss = StockSymbol(api_key)
@@ -17,13 +25,6 @@ ss = StockSymbol(api_key)
 # Alpha vantage key
 alpha_key = os.environ.get('ALP_KEY')
 
-
-# Streamlit config page
-title_icon = Image.open('images/stock_icon.png')
-st.set_page_config(
-    layout="wide",
-    page_title="Dashboard",
-    page_icon=title_icon,)
 
 # Remove the streamlit icon and menubar
 hide_default_format = """<style>#MainMenu {visibility: hidden; }footer {visibility: hidden;}</style>"""
@@ -39,9 +40,6 @@ def load_sym():
     df_us = df_us[['symbol', 'shortName', 'longName', 'exchange', 'market', 'quoteType']]
     stocks_df = pd.concat([df_in, df_us], ignore_index=True)
     return stocks_df
-
-
-
 
 
 

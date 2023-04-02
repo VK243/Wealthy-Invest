@@ -9,18 +9,19 @@ from stocksymbol import StockSymbol
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
-api_key = os.environ.get('SYM_KEY')
-
-ss = StockSymbol(api_key)
-
 # Loading Image using PIL
 title_icon = Image.open('images/stock_icon.png')
 
 st.set_page_config(
     layout="wide",
-    page_title="Stocks",
+    page_title="Stocks and Crypto",
     page_icon=title_icon,)
+
+
+load_dotenv()
+api_key = os.environ.get('SYM_KEY')
+
+ss = StockSymbol(api_key)
 
 
 # Remove the streamlit icon and menubar

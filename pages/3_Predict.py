@@ -6,8 +6,15 @@ import yfinance as yf
 from keras.models import load_model
 import streamlit as st
 from sklearn.preprocessing import MinMaxScaler
+from PIL import Image
 
+# Loading Image using PIL
+title_icon = Image.open('images/stock_icon.png')
 
+st.set_page_config(
+    layout="wide",
+    page_title="Predict",
+    page_icon=title_icon,)
 
 st.title ("Stock Trend Prediction")
 
@@ -16,39 +23,44 @@ stock_input = st.text_input("Enter Stock ", 'AAPL')
 df = yf.Ticker(stock_input).history(period='10y').reset_index()
 st.write("---")
 
-if st.checkbox("Show Data Description",value=True):
-    st.write(df.describe())
+with st.expander("View more Data"):
+    if st.checkbox("Show Data Description",value=True):
+        st.write(df.describe())
 
-if st.checkbox("Show Raw Data",value=True):
-    st.dataframe(df)
+    if st.checkbox("Show Raw Data",value=True):
+        st.dataframe(df)
 st.write("---")   
 
-st.subheader('Closing Price vs timechart')
-fig0 = plt.figure(figsize=(12,6))
-plt.plot(df.Close)
-st.pyplot(fig0)
+col1, col2, col3 = st.columns(3)
 
-st.write("---") 
+with col1:
+    st.subheader('Closing Price vs timechart')
+    st.markdown("## ")
+    st.markdown("## ")
+    fig0 = plt.figure(figsize=(12,6))
+    plt.plot(df.Close)
+    st.pyplot(fig0)
+    st.write("---") 
 
-st.subheader('Closing Price vs timechart with 100 days Moving Average')
-ma100 = df.Close.rolling(100).mean()
-fig1 = plt.figure(figsize=(12,6))
-plt.plot(df.Close)
-plt.plot(ma100)
-st.pyplot(fig1)
+with col2:
+    st.subheader('Closing Price vs timechart with 100 days Moving Average')
+    ma100 = df.Close.rolling(100).mean()
+    fig1 = plt.figure(figsize=(12,6))
+    plt.plot(df.Close)
+    plt.plot(ma100)
+    st.pyplot(fig1)
+    st.write("---") 
 
-st.write("---") 
-
-st.subheader('Closing Price vs timechart with 200 days Moving Average')
-ma100 = df.Close.rolling(100).mean()
-ma200 = df.Close.rolling(200).mean()
-fig2 = plt.figure(figsize=(12,6))
-plt.plot(df.Close)
-plt.plot(ma100)
-plt.plot(ma200)
-st.pyplot(fig2)
-
-st.write("---") 
+with col3:
+    st.subheader('Closing Price vs timechart with 200 days Moving Average')
+    ma100 = df.Close.rolling(100).mean()
+    ma200 = df.Close.rolling(200).mean()
+    fig2 = plt.figure(figsize=(12,6))
+    plt.plot(df.Close)
+    plt.plot(ma100)
+    plt.plot(ma200)
+    st.pyplot(fig2)
+    st.write("---") 
 
 # Spliting Data into training and testing data
 data_train = pd.DataFrame(df['Close'][0:int(len(df)*0.70)])

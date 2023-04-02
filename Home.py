@@ -6,6 +6,9 @@ from PIL import Image
 import requests
 from streamlit_lottie import st_lottie
 import yfinance as yf
+import os
+
+
 
 # Loading Image using PIL
 title_icon = Image.open('images/stock_icon.png')
@@ -18,6 +21,10 @@ st.set_page_config(
 # Remove the streamlit icon and menubar
 hide_default_format = """<style>#MainMenu {visibility: hidden; }footer {visibility: hidden;}</style>"""
 st.markdown(hide_default_format, unsafe_allow_html=True)
+
+
+st.markdown("""<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+""",unsafe_allow_html=True)
 
 @st.cache_resource
 def load_website(url):
@@ -32,8 +39,9 @@ crypto_img = load_website('https://assets5.lottiefiles.com/packages/lf20_O1b0iWu
 predict_img = load_website('https://assets7.lottiefiles.com/packages/lf20_2iHYnjnXho.json')
 
 # API called for list of stock-symbols
-api_key = 'c0995e59-5689-45df-b000-352beab46454'
+api_key = os.environ.get('SYM_KEY')
 ss = StockSymbol(api_key)
+
 
 
 col1,col2,col3 = st.columns([1,6,6])
@@ -67,6 +75,7 @@ with col2:
     c3.metric(label = tsla_info['longName'], value = tsla_info['regularMarketPrice'], delta =tsla_info['regularMarketChangePercent'])
 
     st.markdown("## ")
+
     
 with col1:
     # Add an image for visual interest
@@ -94,6 +103,7 @@ with col1:
     c3.metric(label = tet_info['longName'], value = tet_info['regularMarketPrice'], delta =tet_info['regularMarketChangePercent'])
     
     st.markdown("## ")
+
         
         
 with col2:
@@ -115,8 +125,57 @@ with col2:
 
     st.markdown("## ")
     st.markdown("## ")
+
     
 with col1:
     st_lottie(predict_img, height=400)
     
 st.write("---")    
+st.markdown("## ")
+c1,c2,c3 = st.columns([1,2,1])
+st.markdown("## ")
+with c1:
+
+    st.markdown("## By **Varshith Kumar**")
+
+
+st.markdown(
+    """
+    <style>
+    a.icon {
+        display: inline-block;
+        margin-right: 1.5rem;
+        padding = 30px
+        font-size: 2rem;
+    }
+    .icon:hover {
+        color: #555555;
+    }
+    </style>
+    """
+    , unsafe_allow_html=True
+)
+
+with c3:
+    st.markdown("## ")
+    st.markdown(
+        """
+        <a class=icon href="https://www.linkedin.com/in/iam-vk/" >
+            <i class="fa-brands fa-2xl fa-linkedin"></i>
+        </a>
+        <a class=icon href="https://github.com/VK243">
+            <i class="fa-brands fa-2xl fa-github"></i>
+        </a>
+        <a class=icon href="mailto:varshithkumar243@gmail.com">
+            <i class="fa-solid fa-2xl fa-envelope" ></i>
+        </a>
+        """
+        , unsafe_allow_html=True
+    )
+    st.markdown("## ")
+    st.markdown("@2023 Wealthy Invest")
+st.write("---")
+
+
+
+
