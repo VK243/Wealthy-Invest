@@ -95,14 +95,14 @@ with col1:
     st.markdown("## ")
     c1,c2,c3 = st.columns(3)
     
-    bit_info = yf.Ticker('BTC-USD').info
-    eth_info = yf.Ticker('ETH-USD').info
-    tet_info = yf.Ticker('USDT-USD').info
+    # bit_info = yf.Ticker('BTC-USD').info
+    # eth_info = yf.Ticker('ETH-USD').info
+    # tet_info = yf.Ticker('USDT-USD').info
     
-    c1.metric(label = bit_info['longName'], value = bit_info['regularMarketPrice'], delta =bit_info['regularMarketChangePercent'])
-    c2.metric(label = eth_info['longName'], value = eth_info['regularMarketPrice'], delta =eth_info['regularMarketChangePercent'])
-    c3.metric(label = tet_info['longName'], value = tet_info['regularMarketPrice'], delta =tet_info['regularMarketChangePercent'])
-    
+    # c1.metric(label = bit_info['longName'], value = bit_info['regularMarketPrice'], delta =bit_info['regularMarketChangePercent'])
+    # c2.metric(label = eth_info['longName'], value = eth_info['regularMarketPrice'], delta =eth_info['regularMarketChangePercent'])
+    # c3.metric(label = tet_info['longName'], value = tet_info['regularMarketPrice'], delta =tet_info['regularMarketChangePercent'])
+    st.write("Coming Soon .. ")
     st.markdown("## ")
 
         
